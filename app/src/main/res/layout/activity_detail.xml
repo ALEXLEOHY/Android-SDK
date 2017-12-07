@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/layout_root_padding">
+
+
+    <LinearLayout
+        android:id="@+id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_gas"
+        android:baselineAligned="false"
+        android:gravity="center_horizontal"
+        android:weightSum="7">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/gateWayTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写网关标识"
+                android:singleLine="true"
+                />
+
+            <EditText
+                android:id="@+id/apiTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写api标识"
+                android:singleLine="true"
+                />
+
+            <EditText
+                android:id="@+id/deviceData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写控制值"
+                android:singleLine="true"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写method值"
+                android:singleLine="true"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/timeAgo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写timeAgo值"
+                android:singleLine="true"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/startTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写开始时间"
+                android:singleLine="true"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/endTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写结束时间"
+                android:singleLine="true"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/PageIndex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写pageIndex"
+                android:singleLine="true"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/PageSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请填写PageSize"
+                android:singleLine="true"
+                android:visibility="gone"
+                />
+
+            <Button
+                android:id="@+id/launch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_gas"
+                android:text="发送请求"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/requestUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_gas"
+        android:textColor="#e42121"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/view_gas"
+        android:background="#000"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/postResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_gas"
+                android:text="请求结果 : "
+                android:textIsSelectable="true"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

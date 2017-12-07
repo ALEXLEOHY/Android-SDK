@@ -6,10 +6,10 @@ package cn.com.newland.nle_sdk.requestEntity;
  */
 
 public class Page {
-    private String StartDate;
-    private String EndDate;
-    private String  PageIndex;
-    private String  PageSize;
+    public String StartDate;
+    public String EndDate;
+    public String PageIndex;
+    public String PageSize;
 
     public Page(String startDate, String endDate, String pageIndex, String pageSize) {
         StartDate = startDate;

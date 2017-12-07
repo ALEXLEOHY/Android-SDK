@@ -77,7 +77,7 @@ public class NetWorkBusiness {
     }
 
     public void getOnOffHistory(String gateWayTag, Page page, Callback<BaseResponseEntity<BasePager<PagerItemGateWayOnOff>>> callback) {
-        apiService.getOnOffHistory(gateWayTag, page, accessToken).enqueue(callback);
+        apiService.getOnOffHistory(gateWayTag, page.StartDate,page.EndDate,page.PageIndex,page.PageSize, accessToken).enqueue(callback);
     }
 
     public void getGateWayEnable(String gateWayTag, Callback<BaseResponseEntity<Boolean>> callback) {
@@ -93,11 +93,11 @@ public class NetWorkBusiness {
     }
 
     public void getSensorHistoryData(String gateWayTag, String apiTag, DeviceHistory deviceHistory, Callback<BaseResponseEntity<List<ListItemOfSensorHistory>>> callback) {
-        apiService.getSensorHistoryData(gateWayTag, apiTag, deviceHistory, accessToken).enqueue(callback);
+        apiService.getSensorHistoryData(gateWayTag, apiTag, deviceHistory.Method,deviceHistory.TimeAgo, accessToken).enqueue(callback);
     }
 
     public void getPageSensorData(String gateWayTag, String apiTag, Page page, Callback<BaseResponseEntity<BasePager<PagerItemSensor>>> callback) {
-        apiService.getPageSensorData(gateWayTag, apiTag, page, accessToken).enqueue(callback);
+        apiService.getPageSensorData(gateWayTag, apiTag, page.StartDate,page.EndDate,page.PageIndex,page.PageSize, accessToken).enqueue(callback);
     }
 
     public void getActuatorNewestData(String gateWayTag, String apiTag, Callback<BaseResponseEntity<ActuatorNewestData>> callback) {
@@ -105,11 +105,11 @@ public class NetWorkBusiness {
     }
 
     public void getActuatorHistoryData(String gateWayTag, String apiTag, DeviceHistory deviceHistory, Callback<BaseResponseEntity<List<ListItemOfActuatorHistory>>> callback) {
-        apiService.getActuatorHistoryData(gateWayTag, apiTag, deviceHistory, accessToken).enqueue(callback);
+        apiService.getActuatorHistoryData(gateWayTag, apiTag,deviceHistory.Method,deviceHistory.TimeAgo, accessToken).enqueue(callback);
     }
 
     public void getPageActuatorData(String gateWayTag, String apiTag, Page page, Callback<BaseResponseEntity<BasePager<PagerItemActuator>>> callback) {
-        apiService.getPageActuatorData(gateWayTag, apiTag, page, accessToken).enqueue(callback);
+        apiService.getPageActuatorData(gateWayTag, apiTag, page.StartDate,page.EndDate,page.PageIndex,page.PageSize, accessToken).enqueue(callback);
     }
 
     public void controlActuator(String gateWayTag, String apiTag, String data, Callback<BaseResponseEntity<String>> callback) {

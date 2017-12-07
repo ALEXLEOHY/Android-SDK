@@ -6,8 +6,8 @@ package cn.com.newland.nle_sdk.requestEntity;
  */
 
 public class DeviceHistory {
-    private String Method;
-    private String TimeAgo;
+    public String Method;
+    public String TimeAgo;
 
     /**
      * @param method  1，2，3，4，5对应分钟，小时，天，周，月

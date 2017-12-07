@@ -1,4 +1,4 @@
-package cn.com.newland.android_sdk;
+package cn.com.newland.cloudiiapidemo;
 
 import org.junit.Test;
 
