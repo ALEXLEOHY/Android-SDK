@@ -2,31 +2,24 @@ package cn.com.newland.nle_sdk.util;
 
 import java.util.List;
 
+import cn.com.newland.nle_sdk.requestEntity.DeviceData;
+import cn.com.newland.nle_sdk.requestEntity.DeviceElement;
 import cn.com.newland.nle_sdk.requestEntity.SignIn;
-import cn.com.newland.nle_sdk.responseEntity.ActuatorNewestData;
-import cn.com.newland.nle_sdk.responseEntity.GateWayInfo;
-import cn.com.newland.nle_sdk.responseEntity.GateWayState;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfActuator;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfActuatorHistory;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfCamera;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfNewestData;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfSensor;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfSensorHistory;
-import cn.com.newland.nle_sdk.responseEntity.PagerItemActuator;
-import cn.com.newland.nle_sdk.responseEntity.PagerItemGateWayOnOff;
-import cn.com.newland.nle_sdk.responseEntity.PagerItemSensor;
-import cn.com.newland.nle_sdk.responseEntity.SensorNewestData;
-import cn.com.newland.nle_sdk.responseEntity.TargetActuatorInfo;
-import cn.com.newland.nle_sdk.responseEntity.TargetCameraInfo;
+import cn.com.newland.nle_sdk.responseEntity.Device;
+import cn.com.newland.nle_sdk.responseEntity.DeviceState;
+import cn.com.newland.nle_sdk.responseEntity.ListItemOfDevice;
+import cn.com.newland.nle_sdk.responseEntity.ProjectInfo;
 import cn.com.newland.nle_sdk.responseEntity.TargetSensorInfo;
 import cn.com.newland.nle_sdk.responseEntity.User;
 import cn.com.newland.nle_sdk.responseEntity.base.BasePager;
 import cn.com.newland.nle_sdk.responseEntity.base.BaseResponseEntity;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -39,151 +32,181 @@ public interface ApiService {
     /**
      * 登陆
      */
-    @POST("v2/Account/Login")
+    @POST("Users/Login")
     Call<BaseResponseEntity<User>> signIn(@Body SignIn signIn);
 
     /**
-     * 获取某个网关的信息
+     * 查询单个项目
      */
-    @GET("v2/Gateway/{gatewayTag}")
-    Call<BaseResponseEntity<GateWayInfo>> getGateWayInfoByTag(@Path("gatewayTag") String gateWayTag, @Header("AccessToken") String accessToken);
+    @GET("Projects/{projectId}")
+    Call<BaseResponseEntity<ProjectInfo>> getProject(@Path("projectId") String projectId, @Header("AccessToken") String accessToken);
 
     /**
-     * 获取某个网关的传感器列表
+     * 模糊查询项目
      */
-    @GET("v2/Gateway/{gatewayTag}/SensorList")
-    Call<BaseResponseEntity<List<ListItemOfSensor>>> getGateWaySensorList(@Path("gatewayTag") String gateWayTag, @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个传感器的信息
-     */
-    @GET("v2/Gateway/{gatewayTag}/Sensor/{apiTag}")
-    Call<BaseResponseEntity<TargetSensorInfo>> getSensorInfo(@Path("gatewayTag") String gateWayTag, @Path("apiTag") String apiTag, @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个网关的执行器列表
-     */
-    @GET("v2/Gateway/{gatewayTag}/ActuatorList")
-    Call<BaseResponseEntity<List<ListItemOfActuator>>> getGateWayActuatorList(@Path("gatewayTag") String gateWayTag, @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个执行器的信息
-     */
-    @GET("v2/Gateway/{gatewayTag}/Actuator/{apiTag}")
-    Call<BaseResponseEntity<TargetActuatorInfo>> getGateWayActuatorInfo(
-            @Path("gatewayTag") String gateWayTag, @Path("apiTag") String apiTag, @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个网关的摄像头列表
-     */
-    @GET("v2/Gateway/{gatewayTag}/CameraList")
-    Call<BaseResponseEntity<List<ListItemOfCamera>>> getGateWayCameraList(@Path("gatewayTag") String gateWayTag, @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个摄像头的信息
-     */
-    @GET("v2/Gateway/{gatewayTag}/Camera/{apiTag}")
-    Call<BaseResponseEntity<TargetCameraInfo>> getGateWayCameraInfo(
-            @Path("gatewayTag") String gateWayTag, @Path("apiTag") String apiTag, @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个网关的当前在/离线状态
-     */
-    @GET("v2/Gateway/{gatewayTag}/OnOffline")
-    Call<BaseResponseEntity<GateWayState>> getGateWayState(@Path("gatewayTag") String gateWayTag, @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个网关的历史分页在/离线状态
-     */
-    @GET("v2/Gateway/{gatewayTag}/HistoryPagerOnOffline")
-    Call<BaseResponseEntity<BasePager<PagerItemGateWayOnOff>>> getOnOffHistory(
-            @Path("gatewayTag") String gateWayTag,
+    @GET("Projects")
+    Call<BaseResponseEntity<BasePager<ProjectInfo>>> getProjects(
+            @Query("Keyword") String Keyword,
+            @Query("ProjectTag") String ProjectTag,
+            @Query("NetWorkKind") String NetWorkKind,
+            @Query("PageSize") String PageSize,
             @Query("StartDate") String StartDate,
             @Query("EndDate") String EndDate,
             @Query("PageIndex") String PageIndex,
-            @Query("PageSize") String PageSize,
             @Header("AccessToken") String accessToken);
 
     /**
-     * 获取某个网关的当前启/禁状态
+     * 查询项目所有设备的传感器
      */
-    @GET("v2/Gateway/{gatewayTag}/Status")
-    Call<BaseResponseEntity<Boolean>> getGateWayEnable(@Path("gatewayTag") String gateWayTag, @Header("AccessToken") String accessToken);
+    @GET("Projects/{projectId}/Sensors")
+    Call<BaseResponseEntity<List<TargetSensorInfo>>> getAllSensors(@Path("projectId") String projectId, @Header("AccessToken") String accessToken);
 
     /**
-     * 获取某个网关的所有传感器、执行器最新值
+     * 批量查询设备最新数据
      */
-    @GET("v2/Gateway/{gatewayTag}/NewestDatas")
-    Call<BaseResponseEntity<List<ListItemOfNewestData>>> getAllDeviceNewestData(
-            @Path("gatewayTag") String gateWayTag, @Header("AccessToken") String accessToken);
+    @GET("Devices/Datas")
+    Call<BaseResponseEntity<List<ListItemOfDevice>>> getDevicesDatas(@Query("devIds") String devIds, @Header("AccessToken") String accessToken);
 
     /**
-     * 获取某个传感器的最新值
+     * 批量查询设备的在线状态
      */
-    @GET("v2/Gateway/{gatewayTag}/Sensor/{apiTag}/NewestData")
-    Call<BaseResponseEntity<SensorNewestData>> getSensorNewestData(@Path("gatewayTag") String gateWayTag, @Path("apiTag") String apiTag, @Header("AccessToken") String accessToken);
+    @GET("Devices/Status")
+    Call<BaseResponseEntity<List<DeviceState>>> getBatchOnLine(
+             @Query("devIds") String devIds, @Header("AccessToken") String accessToken);
 
     /**
-     * 获取某个传感器的历史数据
+     *查询单个设备
      */
-    @GET("v2/Gateway/{gatewayTag}/Sensor/{apiTag}/HistoryData")
-    Call<BaseResponseEntity<List<ListItemOfSensorHistory>>> getSensorHistoryData(
-            @Path("gatewayTag") String gateWayTag,
+    @GET("Devices/{deviceId}")
+    Call<BaseResponseEntity<Device>> getDeviceInfo(@Path("deviceId") String deviceId, @Header("AccessToken") String accessToken);
+
+    /**
+     * 模糊查询设备
+     */
+    @GET("Devices")
+    Call<BaseResponseEntity<BasePager<Device>>> getDeviceFuzzy(
+            @Query("Keyword") String Keyword,
+            @Query("DeviceIds") String DeviceIds,
+            @Query("Tag") String Tag,
+            @Query("IsOnline") String IsOnline,
+            @Query("IsShare") String IsShare,
+            @Query("ProjectKeyWord") String ProjectKeyWord,
+            @Query("PageSize") String PageSize,
+            @Query("StartDate") String StartDate,
+            @Query("EndDate") String EndDate,
+            @Query("PageIndex") String PageIndex,
+            @Header("AccessToken") String accessToken);
+
+    /**
+     * 添加1个新设备
+     */
+    @POST("Devices")
+    Call<BaseResponseEntity> postAddDevice(
+           @Body Device device,
+            @Header("AccessToken") String accessToken);
+
+    /**
+     * 更新某个设备
+     */
+    @PUT("Devices/{deviceId}")
+    Call<BaseResponseEntity<Object>> updateDevice(
+            @Path("deviceId") String deviceId,
+            @Body Device device,
+            @Header("AccessToken") String accessToken);
+
+    /**
+     * 删除设备
+     */
+    @DELETE("Devices/{deviceId}")
+    Call<BaseResponseEntity> deleteDevice(@Path("deviceId") String deviceId, @Header("AccessToken") String accessToken);
+
+    /**
+     * 查询单个传感器
+     */
+    @GET("devices/{deviceId}/Sensors/{apiTag}")
+    Call<BaseResponseEntity> getSensor(
+            @Path("deviceId") String deviceId,@Path("apiTag")String apiTag, @Header("AccessToken") String accessToken);
+
+    /**
+     * 模糊查询传感器
+     */
+    @GET("devices/{deviceId}/Sensors")
+    Call<BaseResponseEntity> getSensors(@Path("deviceId") String deviceId, @Query("apiTags") String apiTags, @Header("AccessToken") String accessToken);
+
+    /**
+     * 添加1个新传感器
+     */
+    @POST("devices/{deviceId}/Sensors")
+    Call<BaseResponseEntity> addSensor(
+            @Path("deviceId") String deviceId,
+            @Body DeviceElement deviceElement,
+            @Header("AccessToken") String accessToken);
+
+    /**
+     * 更新某个传感器
+     */
+    @PUT("devices/{deviceId}/Sensors/{apiTag}")
+    Call<BaseResponseEntity> updateSensor(
+            @Path("deviceId") String deviceId,
             @Path("apiTag") String apiTag,
+            @Body DeviceElement.SensorDeviceElement deviceElement,
+            @Header("AccessToken") String accessToken);
+
+    /**
+     * 更新某个执行器
+     */
+    @PUT("devices/{deviceId}/Sensors/{apiTag}")
+    Call<BaseResponseEntity> updateSensor(
+            @Path("deviceId") String deviceId,
+            @Path("apiTag") String apiTag,
+            @Body DeviceElement.ActuatorDeviceElement deviceElement,
+            @Header("AccessToken") String accessToken);
+    /**
+     * 更新某个摄像头
+     */
+    @PUT("devices/{deviceId}/Sensors/{apiTag}")
+    Call<BaseResponseEntity> updateSensor(
+            @Path("deviceId") String deviceId,
+            @Path("apiTag") String apiTag,
+            @Body DeviceElement.CameraDeviceElement deviceElement,
+            @Header("AccessToken") String accessToken);
+    /**
+    /**
+     * 删除某个传感器
+     */
+    @DELETE("devices/{deviceId}/Sensors/{apiTag}")
+    Call<BaseResponseEntity> deleteDeviceElement(
+            @Path("deviceId") String deviceId, @Path("apiTag") String apiTag, @Header("AccessToken") String accessToken);
+
+    /**
+     *  新增传感数据
+     */
+    @POST("devices/{deviceId}/Datas")
+    Call<BaseResponseEntity> addSensorData(
+            @Path("deviceId") String deviceId,
+            @Body DeviceData datasDTO,
+            @Header("AccessToken") String accessToken);
+
+    /**
+     * 查询传感数据
+     */
+    @GET("devices/{deviceId}/Datas")
+    Call<BaseResponseEntity> getSensorData(
+            @Path("deviceId") String deviceId,
+            @Query("ApiTags") String ApiTags,
             @Query("Method") String Method,
             @Query("TimeAgo") String TimeAgo,
-            @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个传感器的历史分页数据
-     */
-    @GET("v2/Gateway/{gatewayTag}/Sensor/{apiTag}/HistoryPagerData")
-    Call<BaseResponseEntity<BasePager<PagerItemSensor>>> getPageSensorData(
-            @Path("gatewayTag") String gateWayTag,
-            @Path("apiTag") String apiTag,
             @Query("StartDate") String StartDate,
             @Query("EndDate") String EndDate,
-            @Query("PageIndex") String PageIndex,
+            @Query("Sort") String Sort,
             @Query("PageSize") String PageSize,
-            @Header("AccessToken") String accessToken);
-
-
-    /**
-     * 获取某个控制器的最新值
-     */
-    @GET("v2/Gateway/{gatewayTag}/Actuator/{apiTag}/NewestData")
-    Call<BaseResponseEntity<ActuatorNewestData>> getActuatorNewestData(
-            @Path("gatewayTag") String gateWayTag, @Path("apiTag") String apiTag, @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个控制器的历史数据
-     */
-    @GET("v2/Gateway/{gatewayTag}/Actuator/{apiTag}/HistoryData")
-    Call<BaseResponseEntity<List<ListItemOfActuatorHistory>>> getActuatorHistoryData(
-            @Path("gatewayTag") String gateWayTag,
-            @Path("apiTag") String apiTag,
-            @Query("Method") String Method,
-            @Query("TimeAgo") String TimeAgo,
-            @Header("AccessToken") String accessToken);
-
-    /**
-     * 获取某个控制器的历史分页数据
-     */
-    @GET("v2/Gateway/{gatewayTag}/Actuator/{apiTag}/HistoryPagerData")
-    Call<BaseResponseEntity<BasePager<PagerItemActuator>>> getPageActuatorData(
-            @Path("gatewayTag") String gateWayTag,
-            @Path("apiTag") String apiTag,
-            @Query("StartDate") String StartDate,
-            @Query("EndDate") String EndDate,
             @Query("PageIndex") String PageIndex,
-            @Query("PageSize") String PageSize,
             @Header("AccessToken") String accessToken);
 
     /**
-     * 控制某个执行器
+     * 发送命令/控制设备
      */
-    @POST("v2/Gateway/{gatewayTag}/actuator/{apiTag}/Control?data={data}")
-    Call<BaseResponseEntity<String>> controlActuator(
-            @Path("gatewayTag") String gateWayTag, @Path("apiTag") String apiTag, @Path("data") String data, @Header("AccessToken") String accessToken);
+    @POST("Cmds")
+    Call<BaseResponseEntity> control(@Query("deviceId")String deviceId, @Query("apiTag")String apiTag,@Body Object data, @Header("AccessToken") String accessToken);
 
 }

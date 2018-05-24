@@ -6,17 +6,16 @@ package cn.com.newland.nle_sdk.responseEntity;
  */
 
 public class TargetSensorInfo {
-    private String DeviceType;
-    private String DeviceGroup;
-    private String Name;
     private String ApiTag;
+    private String Name;
     private String CreateDate;
-    private String  DeviceTypeID;
-    private String DeviceTypeName;
-    private String OperType;
-    private String MinRange;
-    private String MaxRange;
-    private String GatewayDeviceID;
-    private String GatewayID;
-    private String Protocol;
+    private String  TypeAttrs;
+    private String SensorType;
+    private String RecordTime;
+    private String Value;
+    private int Groups;
+    private int Protocol;
+    private int TransType;
+    private int DataType;
+    private int DeviceID;
 }

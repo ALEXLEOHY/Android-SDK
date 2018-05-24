@@ -1,4 +1,4 @@
-package cn.com.newland.cloudiiapidemo;
+package cn.com.newland.cloudiiiapidemo;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,9 +12,12 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import cn.com.newland.cloudiiapidemo.util.DataCache;
+import com.google.gson.Gson;
+
+import cn.com.newland.cloudiiiapidemo.util.DataCache;
 import cn.com.newland.nle_sdk.postDataSet.PostEnum;
 import cn.com.newland.nle_sdk.responseEntity.base.BaseResponseEntity;
+import cn.com.newland.nle_sdk.util.Tools;
 
 public class MainActivity extends BaseActivity {
     private BaseResponseEntity userBaseResponseEntity;
@@ -52,7 +55,7 @@ public class MainActivity extends BaseActivity {
         TextView tvPostResult = findViewById(R.id.postResult);
         TextView tvLoginMsg = findViewById(R.id.loginMsg);
 
-        if (userBaseResponseEntity.getStatus() == 0) {
+        if (userBaseResponseEntity!=null&&userBaseResponseEntity.getStatus() == 0) {
             tvPostResult.setTextColor(Color.parseColor("#FF39C42F"));
             tvPostResult.setText("登陆成功，您的登陆信息为 : ");
         } else {
@@ -61,7 +64,8 @@ public class MainActivity extends BaseActivity {
             tvPostResult.setText("登陆失败，您的登陆信息为 : ");
             return;
         }
-        tvLoginMsg.setText(userBaseResponseEntity.toString());
+        Gson gson = new Gson();
+        Tools.printJson(tvPostResult, gson.toJson(userBaseResponseEntity),false);
 
         listView.setAdapter(new MyAdapter(postEnums));
         scrollView.smoothScrollTo(0,0);

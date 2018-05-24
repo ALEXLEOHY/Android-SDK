@@ -1,4 +1,4 @@
-package cn.com.newland.cloudiiapidemo;
+package cn.com.newland.cloudiiiapidemo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -6,14 +6,16 @@ package cn.com.newland.nle_sdk.responseEntity;
  */
 
 public class ListItemOfSensor {
-    private String Unit;
-    private String DeviceTypeName;
-    private String DeviceType;
-    private String DeviceGroup;
-    private String Name;
     private String ApiTag;
-    private String CreateDate;
-    private int DeviceTypeID;
-    private int GatewayID;
+    private int Groups;
     private int Protocol;
+    private String Name;
+    private String CreateDate;
+    private int TransType;
+    private int DataType;
+    private String TypeAttrs;
+    private int DeviceID;
+    private String SensorType;
+    private String Value;
+    private String RecordTime;
 }

@@ -1,4 +1,4 @@
-package cn.com.newland.cloudiiapidemo;
+package cn.com.newland.cloudiiiapidemo;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cn.com.newland.cloudiiapidemo.util.Constants;
-import cn.com.newland.cloudiiapidemo.util.DataCache;
-import cn.com.newland.cloudiiapidemo.util.SPHelper;
+import cn.com.newland.cloudiiiapidemo.util.Constants;
+import cn.com.newland.cloudiiiapidemo.util.DataCache;
+import cn.com.newland.cloudiiiapidemo.util.SPHelper;
 
 public class SettingActivity extends BaseActivity {
     private TextView tvGateWayTag;
@@ -36,7 +36,7 @@ public class SettingActivity extends BaseActivity {
     @Override
     protected void instantiateView() {
         super.instantiateView();
-        tvGateWayTag = findViewById(R.id.gateWayTag);
+        tvGateWayTag = findViewById(R.id.Tag);
         tvPlatformAddress = findViewById(R.id.platformAddress);
         tvPort = findViewById(R.id.port);
     }

@@ -1,10 +1,10 @@
-package cn.com.newland.cloudiiapidemo.util;
+package cn.com.newland.cloudiiiapidemo.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import cn.com.newland.cloudiiapidemo.R;
+import cn.com.newland.cloudiiiapidemo.R;
 
 public class SPHelper {
     private String defaultModelName;

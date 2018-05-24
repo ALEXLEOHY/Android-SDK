@@ -1,5 +1,11 @@
 package cn.com.newland.nle_sdk.util;
 
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Field;
 
 import retrofit2.Retrofit;
@@ -36,5 +42,36 @@ public class Tools {
 
         }
         return String.valueOf(stringBuffer);
+    }
+
+    public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+    public static void printJson(TextView textView, String msg,boolean clear) {
+        if (clear) {
+            textView.setText("");
+        }
+        String message;
+        try {
+            if (msg.startsWith("{")) {
+                JSONObject jsonObject = new JSONObject(msg);
+                message = jsonObject.toString(4);
+            } else if (msg.startsWith("[")) {
+                JSONArray jsonArray = new JSONArray(msg);
+                message = jsonArray.toString(4);
+            } else {
+                message = msg;
+            }
+        } catch (JSONException e) {
+            message = msg;
+        }
+
+        message = LINE_SEPARATOR + message;
+        String[] lines = message.split(LINE_SEPARATOR);
+        for (String line : lines) {
+            textView.append(line + LINE_SEPARATOR);
+        }
+
+    }
+    public static void printJson(TextView textView, String msg) {
+        printJson(textView,msg,true);
     }
 }

@@ -5,11 +5,9 @@ package cn.com.newland.nle_sdk.responseEntity;
  * 网关在线状态
  */
 
-public class GateWayState {
+public class DeviceState {
     private String LastOnlineIP;
-    private String LastOnlineRegion;
-    private String LastOnlineTime;
-    private String LastOfflineTime;
-    private int GatewayID;
+    private int DeviceID;
+    private String Name;
     private boolean IsOnline;
 }

@@ -2,24 +2,13 @@ package cn.com.newland.nle_sdk.util;
 
 import java.util.List;
 
-import cn.com.newland.nle_sdk.requestEntity.DeviceHistory;
-import cn.com.newland.nle_sdk.requestEntity.Page;
+import cn.com.newland.nle_sdk.requestEntity.DeviceData;
+import cn.com.newland.nle_sdk.requestEntity.DeviceElement;
 import cn.com.newland.nle_sdk.requestEntity.SignIn;
-import cn.com.newland.nle_sdk.responseEntity.ActuatorNewestData;
-import cn.com.newland.nle_sdk.responseEntity.GateWayInfo;
-import cn.com.newland.nle_sdk.responseEntity.GateWayState;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfActuator;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfActuatorHistory;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfCamera;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfNewestData;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfSensor;
-import cn.com.newland.nle_sdk.responseEntity.ListItemOfSensorHistory;
-import cn.com.newland.nle_sdk.responseEntity.PagerItemActuator;
-import cn.com.newland.nle_sdk.responseEntity.PagerItemGateWayOnOff;
-import cn.com.newland.nle_sdk.responseEntity.PagerItemSensor;
-import cn.com.newland.nle_sdk.responseEntity.SensorNewestData;
-import cn.com.newland.nle_sdk.responseEntity.TargetActuatorInfo;
-import cn.com.newland.nle_sdk.responseEntity.TargetCameraInfo;
+import cn.com.newland.nle_sdk.responseEntity.Device;
+import cn.com.newland.nle_sdk.responseEntity.DeviceState;
+import cn.com.newland.nle_sdk.responseEntity.ListItemOfDevice;
+import cn.com.newland.nle_sdk.responseEntity.ProjectInfo;
 import cn.com.newland.nle_sdk.responseEntity.TargetSensorInfo;
 import cn.com.newland.nle_sdk.responseEntity.User;
 import cn.com.newland.nle_sdk.responseEntity.base.BasePager;
@@ -34,7 +23,8 @@ import retrofit2.Callback;
 public class NetWorkBusiness {
     private ApiService apiService;
     private String accessToken;
-    public NetWorkBusiness(String accessToken,String baseUrl) {
+
+    public NetWorkBusiness(String accessToken, String baseUrl) {
         this.apiService = Tools.buildService(baseUrl);
         this.accessToken = accessToken;
     }
@@ -43,77 +33,88 @@ public class NetWorkBusiness {
         apiService.signIn(signIn).enqueue(callback);
     }
 
-    public void getGateWayInfo(String gateWayTag, Callback<BaseResponseEntity<GateWayInfo>> callback) {
-        apiService.getGateWayInfoByTag(gateWayTag, accessToken).enqueue(callback);
+    public void getProject(String projectId, Callback<BaseResponseEntity<ProjectInfo>> callback) {
+        apiService.getProject(projectId, accessToken).enqueue(callback);
     }
 
-    public void getGateWaySensorList(String gateWayTag, Callback<BaseResponseEntity<List<ListItemOfSensor>>> callback) {
-        apiService.getGateWaySensorList(gateWayTag, accessToken).enqueue(callback);
+    public void getProjects(String Keyword, String ProjectTag, String NetWorkKind, String PageSize, String StartDate, String EndDate, String PageIndex,
+            Callback<BaseResponseEntity<BasePager<ProjectInfo>>> callback) {
+        apiService.getProjects(Keyword, ProjectTag, NetWorkKind, PageSize, StartDate, EndDate, PageIndex, accessToken).enqueue(callback);
     }
 
-    public void getSensorInfo(String gateWayTag, String apiTag, Callback<BaseResponseEntity<TargetSensorInfo>> callback) {
-        apiService.getSensorInfo(gateWayTag, apiTag, accessToken).enqueue(callback);
+    public void getAllSensors(String projectId, Callback<BaseResponseEntity<List<TargetSensorInfo>>> callback) {
+        apiService.getAllSensors(projectId, accessToken).enqueue(callback);
     }
 
-    public void getGateWayActuatorList(String gateWayTag, Callback<BaseResponseEntity<List<ListItemOfActuator>>> callback) {
-        apiService.getGateWayActuatorList(gateWayTag, accessToken).enqueue(callback);
+    public void getDevicesDatas(String deviceIds, Callback<BaseResponseEntity<List<ListItemOfDevice>>> callback) {
+        apiService.getDevicesDatas(deviceIds, accessToken).enqueue(callback);
     }
 
-    public void getActuatorInfo(String gateWayTag, String apiTag, Callback<BaseResponseEntity<TargetActuatorInfo>> callback) {
-        apiService.getGateWayActuatorInfo(gateWayTag, apiTag, accessToken).enqueue(callback);
+    public void getBatchOnLine(String deviceIds, Callback<BaseResponseEntity<List<DeviceState>>> callback) {
+        apiService.getBatchOnLine(deviceIds, accessToken).enqueue(callback);
 
     }
 
-    public void getGateWayCameraList(String gateWayTag, Callback<BaseResponseEntity<List<ListItemOfCamera>>> callback) {
-        apiService.getGateWayCameraList(gateWayTag, accessToken).enqueue(callback);
+    public void getDeviceInfo(String deviceId, Callback<BaseResponseEntity<Device>> callback) {
+        apiService.getDeviceInfo(deviceId, accessToken).enqueue(callback);
     }
 
-    public void getCameraInfo(String gateWayTag, String apiTag, Callback<BaseResponseEntity<TargetCameraInfo>> callback) {
-        apiService.getGateWayCameraInfo(gateWayTag, apiTag, accessToken).enqueue(callback);
+    public void getDeviceFuzzy(String Keyword, String DeviceIds, String Tag, String IsOnline, String IsShare, String ProjectKeyWord, String PageSize, String StartDate, String
+            EndDate, String PageIndex, Callback<BaseResponseEntity<BasePager<Device>>> callback) {
+        apiService.getDeviceFuzzy(Keyword, DeviceIds, Tag, IsOnline, IsShare, ProjectKeyWord, PageSize, StartDate, EndDate, PageIndex, accessToken).enqueue(callback);
     }
 
-    public void getGateWayState(String gateWayTag, Callback<BaseResponseEntity<GateWayState>> callback) {
-        apiService.getGateWayState(gateWayTag, accessToken).enqueue(callback);
+    public void postAddDevice(Device device, Callback<BaseResponseEntity> callback) {
+        apiService.postAddDevice(device, accessToken).enqueue(callback);
     }
 
-    public void getOnOffHistory(String gateWayTag, Page page, Callback<BaseResponseEntity<BasePager<PagerItemGateWayOnOff>>> callback) {
-        apiService.getOnOffHistory(gateWayTag, page.StartDate,page.EndDate,page.PageIndex,page.PageSize, accessToken).enqueue(callback);
+    public void updateDevice(String deviceId, Device device, Callback<BaseResponseEntity<Object>> callback) {
+        apiService.updateDevice(deviceId, device, accessToken).enqueue(callback);
     }
 
-    public void getGateWayEnable(String gateWayTag, Callback<BaseResponseEntity<Boolean>> callback) {
-        apiService.getGateWayEnable(gateWayTag, accessToken).enqueue(callback);
+    public void deleteDevice(String deviceId, Callback<BaseResponseEntity> callback) {
+        apiService.deleteDevice(deviceId, accessToken).enqueue(callback);
     }
 
-    public void getAllDeviceNewestData(String gateWayTag, Callback<BaseResponseEntity<List<ListItemOfNewestData>>> callback) {
-        apiService.getAllDeviceNewestData(gateWayTag, accessToken).enqueue(callback);
+    public void getSensor(String deviceId, String apiTag, Callback<BaseResponseEntity> callback) {
+        apiService.getSensor(deviceId, apiTag, accessToken).enqueue(callback);
     }
 
-    public void getSensorNewestData(String gateWayTag, String apiTag, Callback<BaseResponseEntity<SensorNewestData>> callback) {
-        apiService.getSensorNewestData(gateWayTag, apiTag, accessToken).enqueue(callback);
+    public void getSensors(String deviceId, String apiTags, Callback<BaseResponseEntity> callback) {
+        apiService.getSensors(deviceId, apiTags, accessToken).enqueue(callback);
     }
 
-    public void getSensorHistoryData(String gateWayTag, String apiTag, DeviceHistory deviceHistory, Callback<BaseResponseEntity<List<ListItemOfSensorHistory>>> callback) {
-        apiService.getSensorHistoryData(gateWayTag, apiTag, deviceHistory.Method,deviceHistory.TimeAgo, accessToken).enqueue(callback);
+    public void addSensor(String deviceId, DeviceElement deviceElement, Callback<BaseResponseEntity> callback) {
+        apiService.addSensor(deviceId, deviceElement, accessToken).enqueue(callback);
     }
 
-    public void getPageSensorData(String gateWayTag, String apiTag, Page page, Callback<BaseResponseEntity<BasePager<PagerItemSensor>>> callback) {
-        apiService.getPageSensorData(gateWayTag, apiTag, page.StartDate,page.EndDate,page.PageIndex,page.PageSize, accessToken).enqueue(callback);
+    public void updateSensor(String deviceId, String apiTag, DeviceElement.SensorDeviceElement deviceElement, Callback<BaseResponseEntity> callback) {
+        apiService.updateSensor(deviceId, apiTag, deviceElement, accessToken).enqueue(callback);
     }
 
-    public void getActuatorNewestData(String gateWayTag, String apiTag, Callback<BaseResponseEntity<ActuatorNewestData>> callback) {
-        apiService.getActuatorNewestData(gateWayTag, apiTag, accessToken).enqueue(callback);
+    public void updateActuator(String deviceId, String apiTag, DeviceElement.ActuatorDeviceElement deviceElement, Callback<BaseResponseEntity> callback) {
+        apiService.updateSensor(deviceId, apiTag, deviceElement, accessToken).enqueue(callback);
     }
 
-    public void getActuatorHistoryData(String gateWayTag, String apiTag, DeviceHistory deviceHistory, Callback<BaseResponseEntity<List<ListItemOfActuatorHistory>>> callback) {
-        apiService.getActuatorHistoryData(gateWayTag, apiTag,deviceHistory.Method,deviceHistory.TimeAgo, accessToken).enqueue(callback);
+    public void updateCamera(String deviceId, String apiTag, DeviceElement.CameraDeviceElement deviceElement, Callback<BaseResponseEntity> callback) {
+        apiService.updateSensor(deviceId, apiTag, deviceElement, accessToken).enqueue(callback);
     }
 
-    public void getPageActuatorData(String gateWayTag, String apiTag, Page page, Callback<BaseResponseEntity<BasePager<PagerItemActuator>>> callback) {
-        apiService.getPageActuatorData(gateWayTag, apiTag, page.StartDate,page.EndDate,page.PageIndex,page.PageSize, accessToken).enqueue(callback);
+    public void deleteDeviceElement(String deviceId, String apiTag, Callback<BaseResponseEntity> callback) {
+        apiService.deleteDeviceElement(deviceId, apiTag, accessToken).enqueue(callback);
     }
 
-    public void controlActuator(String gateWayTag, String apiTag, String data, Callback<BaseResponseEntity<String>> callback) {
-        apiService.controlActuator(gateWayTag, apiTag, data, accessToken).enqueue(callback);
+    public void addSensorData(String deviceId, DeviceData datasDTO, Callback<BaseResponseEntity> callback) {
+        apiService.addSensorData(deviceId, datasDTO, accessToken).enqueue(callback);
+    }
+
+    public void getSensorData(String deviceId, String ApiTags, String Method, String TimeAgo, String StartDate, String EndDate, String Sort, String PageSize, String PageIndex,
+            Callback<BaseResponseEntity> callback) {
+        apiService.getSensorData(deviceId, ApiTags, Method, TimeAgo, StartDate, EndDate, Sort, PageSize, PageIndex, accessToken).enqueue(callback);
+    }
+
+    public void control(String deviceId, String apiTag, Object data, Callback<BaseResponseEntity> callback) {
+        apiService.control(deviceId, apiTag, data, accessToken).enqueue(callback);
     }
 
 

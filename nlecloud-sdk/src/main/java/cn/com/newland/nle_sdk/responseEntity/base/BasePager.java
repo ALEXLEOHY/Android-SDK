@@ -9,6 +9,26 @@ import java.util.List;
 
 public class BasePager<T> {
     private List<T> PageSet;
+    private int PageCount;
+    private int PageIndex;
+    private int PageSize;
+    private int RecordCount;
+
+    public int getPageCount() {
+        return PageCount;
+    }
+
+    public int getPageIndex() {
+        return PageIndex;
+    }
+
+    public int getPageSize() {
+        return PageSize;
+    }
+
+    public int getRecordCount() {
+        return RecordCount;
+    }
 
     List<T> getPageSet() {
         return PageSet;

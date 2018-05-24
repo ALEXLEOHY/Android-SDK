@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/layout_root_padding"
-    tools:context="cn.com.newland.cloudiiapidemo.LoginActivity">
+    tools:context="cn.com.newland.cloudiiiapidemo.LoginActivity">
 
     <Button
         android:id="@+id/setting"
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/view_gas"
                     android:hint="请填写云平台用户名"
-                    android:singleLine="true"
+
                     />
 
             </LinearLayout>
@@ -71,7 +71,7 @@
                     android:layout_marginLeft="@dimen/view_gas"
                     android:layout_marginStart="@dimen/view_gas"
                     android:inputType="textPassword"
-                    android:singleLine="true"
+
                     />
 
             </LinearLayout>

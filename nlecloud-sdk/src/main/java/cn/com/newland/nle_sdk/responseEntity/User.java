@@ -11,6 +11,16 @@ public class User implements Serializable {
     private String UserID;
     private String UserName;
     private String AccessToken;
+    private String DataToken;
+
+    public void setDataToken(String dataToken) {
+        DataToken = dataToken;
+    }
+
+    public String getDataToken() {
+
+        return DataToken;
+    }
 
     public void setUserID(String userID) {
         UserID = userID;

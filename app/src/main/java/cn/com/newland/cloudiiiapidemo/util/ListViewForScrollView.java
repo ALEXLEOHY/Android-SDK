@@ -1,4 +1,4 @@
-package cn.com.newland.cloudiiapidemo.util;
+package cn.com.newland.cloudiiiapidemo.util;
 
 import android.content.Context;
 import android.util.AttributeSet;

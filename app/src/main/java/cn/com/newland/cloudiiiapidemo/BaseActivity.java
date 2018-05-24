@@ -1,4 +1,4 @@
-package cn.com.newland.cloudiiapidemo;
+package cn.com.newland.cloudiiiapidemo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +14,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         onFirst(savedInstanceState);
         setContentView(setLayoutRes());
-        setTitle("云二期Api - " + setTitle());
+        setTitle("云三期Api - " + setTitle());
         instantiateView();
         initViewData();
         registerListener();

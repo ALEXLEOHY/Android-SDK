@@ -6,24 +6,30 @@ package cn.com.newland.nle_sdk.postDataSet;
  */
 
 public enum PostEnum {
-    GET_GATEWAY_INFO("v2/Gateway/{gatewayTag}", "获取某个网关的信息"),
-    GET_GATEWAY_SENSOR_LIST("v2/Gateway/{gatewayTag}/SensorList","获取某个网关的传感器列表"),
-    GET_SENSOR_INFO("v2/Gateway/{gatewayTag}/Sensor/{apiTag}","获取某个传感器的信息"),
-    GET_GATEWAY_ACTUATOR_LIST("v2/Gateway/{gatewayTag}/ActuatorList","获取某个网关的执行器列表"),
-    GET_ACTUATOR_INFO("v2/Gateway/{gatewayTag}/Actuator/{apiTag}","获取某个执行器的信息"),
-    GET_GATEWAY_CAMERA_LIST("v2/Gateway/{gatewayTag}/CameraList","获取某个网关的摄像头列表"),
-    GET_CAMERA_INFO("v2/Gateway/{gatewayTag}/Camera/{apiTag}","获取某个摄像头的信息"),
-    GET_GATEWAY_ONOFF_LINE("v2/Gateway/{gatewayTag}/OnOffline","获取某个网关的当前在/离线状态"),
-    GET_GATEWAY_HISTORY_PAGER_ONOFF_LINE("v2/Gateway/{gatewayTag}/HistoryPagerOnOffline","获取某个网关的历史分页在/离线状态"),
-    GET_GATEWAY_ENABLE("v2/Gateway/{gatewayTag}/Status", "获取某个网关的当前启/禁用状态"),
-    GET_GATEWAY_NEWSDATAS("v2/Gateway/{gatewayTag}/NewestDatas", "获取某个网关的所有传感器、执行器最新值"),
-    GET_TARGET_SENSOR_NEWDATA("v2/Gateway/{gatewayTag}/Sensor/{apiTag}/NewestData", "获取某个传感器的最新值"),
-    GET_TARGET_SENSOR_HISTORY_DATA("v2/Gateway/{gatewayTag}/Sensor/{apiTag}/HistoryData", "获取某个传感器的历史数据"),
-    GET_TARGET_SENSOR_PAGER_HISTORY_DATA("v2/Gateway/{gatewayTag}/Sensor/{apiTag}/HistoryPagerData", "获取某个传感器的历史分页数据"),
-    GET_TARGET_ACTUATOR_NEWDATA("v2/Gateway/{gatewayTag}/Actuator/{apiTag}/NewestData", "获取某个控制器的最新值"),
-    GET_TARGET_ACTUATOR_HISTORY_DATA("v2/Gateway/{gatewayTag}/Actuator/{apiTag}/HistoryData", "获取某个控制器的历史数据"),
-    GET_TARGET_ACTUATOR_PARGER_HISTORY_DATA("v2/Gateway/{gatewayTag}/Actuator/{apiTag}/HistoryPagerData", "获取某个控制器的历史分页数据"),
-    CONTROL_TARGET_ACTUATOR("v2/Gateway/{gatewayTag}/actuator/{apiTag}/Control?data={data}", "控制某个执行器");
+    GET_PROJECT("Projects/{projectId}", "查询单个项目"),
+    GET_PROJECTS("Projects","模糊查询项目"),
+    GET_SENSORS("Projects/{projectId}/Sensors","查询项目所有设备的传感器"),
+
+    GET_DEVICE_NEWS_DATA("Devices/Datas","批量查询设备最新数据"),
+    GET_DEVICE_STATES("Devices/Status","批量查询设备的在线状态"),
+    GET_DEVICE("Devices/{deviceId}","查询单个设备"),
+    GET_DEVICES("Devices","模糊查询设备"),
+    POST_ADD_DEVICE("Devices","添加1个新设备"),
+    PUT_UPDATE_DEVICE("Devices/{deviceId}","更新某个设备"),
+    DELETE_DEVICE("Devices/{deviceId}", "删除某个设备"),
+
+
+    GET_SENSOR("{deviceId}/Sensors/{apiTag}", " 查询单个传感器"),
+    GET_SENSORS_BY_DEVICE("devices/{deviceId}/Sensors", "模糊查询传感器"),
+    POST_ADD_SENSOR("devices/{deviceId}/Sensors", "添加1个新传感器"),
+    PUT_UPDATE_SENSOR("devices/{deviceId}/Sensors/{apiTag}", "更新某个传感器"),
+    DELETE_SENSOR("devices/{deviceId}/Sensors/{apiTag}", "删除某个传感器"),
+
+
+    POST_ADD_SENSOR_DATA("devices/{deviceId}/Datas", "新增传感数据"),
+    GET_SENSOR_DATA("devices/{deviceId}/Datas", "查询传感数据"),
+
+    POST_CONTROL("Cmds", "发送命令/控制设备");
     private String url;
     private String title;
 

@@ -1,4 +1,4 @@
-package cn.com.newland.cloudiiapidemo.util;
+package cn.com.newland.cloudiiiapidemo.util;
 
 /**
  * Created by marco on 2017/8/21.

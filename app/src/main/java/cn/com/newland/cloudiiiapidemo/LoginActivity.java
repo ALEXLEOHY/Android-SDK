@@ -1,4 +1,4 @@
-package cn.com.newland.cloudiiapidemo;
+package cn.com.newland.cloudiiiapidemo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cn.com.newland.cloudiiapidemo.util.Constants;
-import cn.com.newland.cloudiiapidemo.util.DataCache;
-import cn.com.newland.cloudiiapidemo.util.SPHelper;
+import cn.com.newland.cloudiiiapidemo.util.Constants;
+import cn.com.newland.cloudiiiapidemo.util.DataCache;
+import cn.com.newland.cloudiiiapidemo.util.SPHelper;
 import cn.com.newland.nle_sdk.requestEntity.SignIn;
 import cn.com.newland.nle_sdk.responseEntity.User;
 import cn.com.newland.nle_sdk.responseEntity.base.BaseResponseEntity;
@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity {
     @SuppressLint("SetTextI18n")
     private void setTipInfo() {
         String baseUrl = DataCache.getBaseUrl(getApplicationContext());
-        if (!TextUtils.isEmpty(baseUrl)) tvTip.setText("您的登陆请求地址为:\n" + baseUrl + "v2/Account/Login");
+        if (!TextUtils.isEmpty(baseUrl)) tvTip.setText("您的登陆请求地址为:\n" + baseUrl + "Users/Login");
     }
 
 

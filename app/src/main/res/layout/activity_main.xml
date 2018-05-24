@@ -30,15 +30,8 @@
             android:layout_marginTop="@dimen/view_gas"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="以下所有接口的调用必须使用Post请求，并且要添加登陆成功后的AccessToken作为头信息。"
-                android:textColor="#e13a3a"
-                android:textSize="20sp"/>
 
-            <cn.com.newland.cloudiiapidemo.util.ListViewForScrollView
+            <cn.com.newland.cloudiiiapidemo.util.ListViewForScrollView
                 android:id="@+id/apiList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CloudIIApiDemo.iml" filepath="$PROJECT_DIR$/CloudIIApiDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CloudIIApiDemoIII.iml" filepath="$PROJECT_DIR$/CloudIIApiDemoIII.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\as_newland_ws\CloudIIApiDemo\nlecloud-sdk\nle-sdk.iml" filepath="D:\as_newland_ws\CloudIIApiDemo\nlecloud-sdk\nle-sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/nlecloud-sdk/nlecloud-sdk.iml" filepath="$PROJECT_DIR$/nlecloud-sdk/nlecloud-sdk.iml" />
     </modules>
   </component>

@@ -23,6 +23,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/view_gas"
@@ -35,12 +36,12 @@
                     android:text="网关标识 : "/>
 
                 <EditText
-                    android:id="@+id/gateWayTag"
+                    android:id="@+id/Tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/view_gas"
                     android:layout_marginStart="@dimen/view_gas"
-                    android:singleLine="true"
+
                     />
 
             </LinearLayout>
@@ -53,15 +54,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="平台地址 : "/>
+                    android:text="api地址 : "/>
 
                 <EditText
+                    android:text="api.nlecloud.com"
                     android:id="@+id/platformAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/view_gas"
                     android:hint="如: 192.168.0.111"
-                    android:singleLine="true"/>
+                    />
 
             </LinearLayout>
 
@@ -85,7 +87,7 @@
                     android:layout_marginLeft="@dimen/view_gas"
                     android:layout_marginStart="@dimen/view_gas"
                     android:inputType="number"
-                    android:singleLine="true"
+
                     android:text="80"/>
 
             </LinearLayout>
